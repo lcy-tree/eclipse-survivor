@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>月蚀幸存者</title>
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%2309090c"/><path d="M42 9c-9 3-15 11-15 21s6 18 15 21c-14 4-28-6-28-21S28 5 42 9Z" fill="%23f4c95d"/></svg>'>
+    <link rel="stylesheet" href="styles.css?v=v4-cards">
+  </head>
+  <body>
+    <main id="app">
+      <canvas id="game" aria-label="月蚀幸存者游戏画面"></canvas>
+
+      <header id="topbar" class="topbar">
+        <div class="brand">
+          <span class="brand-mark">☾</span>
+          <span>月蚀幸存者</span>
+        </div>
+        <div class="account">
+          <span id="account-name">游客</span>
+          <span id="dust-pill">0 月尘</span>
+          <button class="login-open small-button" type="button">登录</button>
+          <button class="logout-button small-button hidden" type="button">退出</button>
+        </div>
+      </header>
+
+      <section id="menu-screen" class="menu-screen hidden">
+        <nav class="menu-nav">
+          <div class="nav-brand">
+            <span class="nav-brand-icon">☾</span>
+            <span class="nav-brand-text">月蚀幸存者</span>
+          </div>
+          <div class="nav-items">
+            <button class="nav-item active" data-panel="story-panel" type="button">
+              <span class="nav-icon">⚔</span><span>故事模式</span>
+            </button>
+            <button class="nav-item" data-panel="coop-panel" type="button">
+              <span class="nav-icon">👥</span><span>联机协作</span>
+            </button>
+            <button class="nav-item" data-panel="research-panel" type="button">
+              <span class="nav-icon">✦</span><span>长期养成</span>
+            </button>
+            <button class="nav-item" data-panel="codex-panel" type="button">
+              <span class="nav-icon">📖</span><span>月蚀图鉴</span>
+            </button>
+            <button class="nav-item" data-panel="social-panel" type="button">
+              <span class="nav-icon">♡</span><span>社交</span>
+            </button>
+            <button class="nav-item" data-panel="leaderboard-panel" type="button">
+              <span class="nav-icon">♛</span><span>排行榜</span>
+            </button>
+          </div>
+          <div class="nav-spacer"></div>
+          <div class="nav-account">
+            <span id="nav-account-name" class="nav-account-name">游客</span>
+            <span id="nav-dust-pill" class="nav-dust-pill">0 月尘</span>
+            <div class="nav-account-actions">
+              <button class="login-open small-button" type="button">登录</button>
+              <button class="logout-button small-button hidden" type="button">退出</button>
+            </div>
+          </div>
+        </nav>
+
+        <main class="menu-main">
+          <div id="story-panel" class="panel active">
+            <div class="panel-header">
+              <h2>故事模式</h2>
+              <p>章节闯关 · 50个关卡 · 10个主题区域</p>
+            </div>
+            <div id="daily-challenge" class="daily-challenge"></div>
+            <div id="chapter-list" class="chapter-grid"></div>
+          </div>
+
+          <div id="coop-panel" class="panel">
+            <div class="panel-header">
+              <h2>联机协作</h2>
+              <p id="online-count">2-5人房间制联机 · 词条挑战 · 协作通关</p>
+            </div>
+            <div id="weekly-challenge" class="weekly-card"></div>
+            <div class="coop-layout">
+              <div class="tool-block">
+                <h2>创建房间</h2>
+                <select id="coop-chapter"></select>
+                <select id="coop-difficulty"></select>
+                <div class="section-line">
+                  <strong>随机房间词条</strong>
+                  <button id="refresh-modifiers" class="small-button" type="button">刷新</button>
+                </div>
+                <div id="modifier-list" class="modifier-list"></div>
+                <div class="section-line"><strong>本局技能池</strong></div>
+                <div id="skill-preview" class="skill-preview"></div>
+                <button id="create-room" class="primary-button" type="button">创建联机房间</button>
+              </div>
+              <div class="tool-block">
+                <h2>加入房间</h2>
+                <input id="room-code-input" maxlength="5" placeholder="房间码">
+                <button id="join-room" class="primary-button" type="button">加入</button>
+                <div class="section-line"><strong>公开房间</strong></div>
+                <div id="room-list" class="room-list"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="research-panel" class="panel">
+            <div class="panel-header">
+              <h2>长期养成</h2>
+              <p>月蚀星盘 · 攻击/生存/机动/资源/协作/深层</p>
+            </div>
+            <div id="research-summary" class="research-summary"></div>
+          </div>
+
+          <div id="codex-panel" class="panel">
+            <div class="panel-header">
+              <h2>月蚀图鉴</h2>
+              <p>敌人、首领、英雄、章节与战斗词条手册</p>
+            </div>
+            <div id="codex-summary" class="codex-summary"></div>
+          </div>
+
+          <div id="social-panel" class="panel">
+            <div class="panel-header">
+              <h2>社交</h2>
+              <p>好友管理 · 申请与邀请</p>
+            </div>
+            <div class="split-layout">
+              <div class="tool-block">
+                <h2>添加好友</h2>
+                <input id="friend-name-input" maxlength="18" placeholder="输入玩家用户名">
+                <button id="add-friend" class="primary-button" type="button">添加好友</button>
+              </div>
+              <div class="tool-block">
+                <h2>好友列表</h2>
+                <div id="friend-list" class="friend-list"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="leaderboard-panel" class="panel">
+            <div class="panel-header">
+              <h2>排行榜</h2>
+              <p>今日与历史 · 得分与击杀</p>
+            </div>
+            <div class="leader-filters">
+              <button class="tab-button active" data-board-scope="daily" type="button">今日</button>
+              <button class="tab-button" data-board-scope="all" type="button">历史</button>
+              <button class="tab-button active" data-board-metric="score" type="button">得分榜</button>
+              <button class="tab-button" data-board-metric="kills" type="button">击杀榜</button>
+            </div>
+            <div id="leaderboard-list" class="leaderboard-list"></div>
+          </div>
+        </main>
+      </section>
+
+      <section id="auth-screen" class="screen compact-screen hidden">
+        <h2 id="auth-title">登录</h2>
+        <p id="auth-subtitle" class="auth-subtitle">欢迎回来，继续你的月蚀之旅</p>
+        <div class="form-grid">
+          <input id="auth-username" autocomplete="username" placeholder="用户名">
+          <input id="auth-password" type="password" autocomplete="current-password" placeholder="密码">
+          <input id="auth-password-confirm" type="password" autocomplete="new-password" placeholder="确认密码" class="register-only">
+          <input id="auth-email" type="email" autocomplete="email" placeholder="邮箱地址" class="register-only">
+          <div class="code-row register-only">
+            <input id="auth-code" maxlength="6" placeholder="验证码">
+            <button id="send-code" class="ghost-button" type="button">发送验证码</button>
+          </div>
+          <button id="auth-submit" class="primary-button" type="button">登录</button>
+        </div>
+        <div class="auth-toggle">
+          <span id="auth-toggle-text">没有账号？</span>
+          <button id="auth-toggle-btn" class="text-button" type="button">去注册</button>
+        </div>
+        <button id="auth-close" class="text-button" type="button">关闭</button>
+      </section>
+
+      <section id="research-screen" class="research-screen hidden">
+        <div class="research-top">
+          <button id="research-back" class="ghost-button" type="button">返回大厅</button>
+          <div>
+            <h1>长期研究</h1>
+            <p>月蚀星盘 · 研究地图</p>
+          </div>
+          <div class="research-resource-row">
+            <span id="research-dust">0 月尘</span>
+            <span id="research-progress">0/0</span>
+          </div>
+        </div>
+        <div class="research-page">
+          <aside id="research-branches" class="research-branches"></aside>
+          <div id="research-map-host" class="research-map-host"></div>
+        </div>
+      </section>
+
+      <section id="codex-screen" class="codex-screen hidden">
+        <div class="codex-top">
+          <button id="codex-back" class="ghost-button" type="button">返回大厅</button>
+          <div>
+            <h1>月蚀图鉴</h1>
+            <p>敌人、首领、英雄、章节与战斗词条手册</p>
+          </div>
+        </div>
+        <div class="codex-book">
+          <aside id="codex-tabs" class="codex-tabs"></aside>
+          <section class="codex-right">
+            <div id="codex-index" class="codex-index"></div>
+            <div id="codex-info" class="codex-info hidden"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="talent-detail-screen" class="screen talent-detail-screen hidden">
+        <div class="detail-head">
+          <button id="talent-detail-back" class="ghost-button" type="button">返回研究树</button>
+          <div>
+            <h2 id="talent-detail-title">研究详情</h2>
+            <p id="talent-detail-subtitle"></p>
+          </div>
+        </div>
+        <div id="talent-detail-body" class="talent-detail-body"></div>
+      </section>
+
+      <section id="room-screen" class="screen room-screen hidden">
+        <div class="room-head">
+          <div>
+            <h2 id="room-title">房间</h2>
+            <p id="room-subtitle"></p>
+          </div>
+          <button id="copy-room-code" class="ghost-button" type="button">复制房间码</button>
+          <button id="leave-room" class="ghost-button" type="button">离开</button>
+        </div>
+        <div id="room-modifiers" class="room-modifiers"></div>
+        <div id="invite-list" class="invite-list"></div>
+        <div id="member-list" class="member-list"></div>
+        <div class="room-actions">
+          <select id="hero-select"></select>
+          <button id="ready-button" class="ghost-button" type="button">准备</button>
+          <button id="start-room" class="primary-button" type="button">开始</button>
+        </div>
+        <div class="quick-chat">
+          <button data-chat="集合" type="button">集合</button>
+          <button data-chat="救我" type="button">救我</button>
+          <button data-chat="打 Boss" type="button">打 Boss</button>
+          <button data-chat="拿宝箱" type="button">拿宝箱</button>
+        </div>
+        <div class="room-chat">
+          <div id="chat-messages" class="chat-messages"></div>
+          <div class="chat-input-row">
+            <input id="chat-input" maxlength="36" placeholder="输入消息...">
+            <button id="chat-send" class="small-button" type="button">发送</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="hud" class="hud hidden">
+        <div class="hud-left">
+          <div class="stat-line">
+            <span id="timer">00:00</span>
+            <span id="chapter-name">银雾荒原</span>
+            <span id="team-level">Lv. 1</span>
+            <span id="kills">0 斩</span>
+          </div>
+          <div class="bars">
+            <div class="bar hp"><span id="hp-fill"></span></div>
+            <div class="bar xp"><span id="xp-fill"></span></div>
+          </div>
+          <div id="team-row" class="team-row"></div>
+        </div>
+        <div class="hud-right">
+          <button id="mute-button" class="icon-button" type="button" title="静音">♪</button>
+          <button id="pause-button" class="icon-button" type="button" title="菜单">☰</button>
+        </div>
+      </section>
+
+      <section id="upgrade-screen" class="screen upgrade-screen hidden">
+        <h2>星辉共鸣</h2>
+        <div id="upgrade-options" class="upgrade-options"></div>
+      </section>
+
+      <section id="end-screen" class="screen compact-screen hidden">
+        <h2 id="end-title">远征结束</h2>
+        <div id="end-stats" class="end-stats"></div>
+        <button id="back-menu" class="primary-button" type="button">返回大厅</button>
+      </section>
+
+      <div id="toast-stack" class="toast-stack"></div>
+      <div id="touch-stick" class="touch-stick hidden"><span></span></div>
+      <div id="screen-flash" class="screen-flash"></div>
+    </main>
+    <script src="src/game.js?v=v4-cards" defer></script>
+  </body>
+</html>

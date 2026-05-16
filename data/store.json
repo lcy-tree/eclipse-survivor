@@ -1,0 +1,474 @@
+{
+  "users": {
+    "98e9fbe6-9489-42fc-b5ea-fb327438ba02": {
+      "id": "98e9fbe6-9489-42fc-b5ea-fb327438ba02",
+      "username": "生当鼎食死封侯",
+      "usernameLower": "生当鼎食死封侯",
+      "email": "835329879@qq.com",
+      "salt": "6f75988fc30aee054cca4867d1ad513a",
+      "hash": "3f1c5bbb759373529fbd48637f9e65a4356964fa8281a4a55727ea1cfa9bd49890096f7940288e2c9505694df4016fbb6f897e859c67cf87da4bacc4a6cc3c6f",
+      "createdAt": 1778228753055,
+      "profile": {
+        "nickname": "生当鼎食死封侯",
+        "moonDust": 0,
+        "talents": {
+          "might": 0,
+          "keenEdge": 0,
+          "execution": 0,
+          "fury": 0,
+          "bloodrage": 0,
+          "deathmark": 0,
+          "multistar": 0,
+          "overwhelm": 0,
+          "starfall": 0,
+          "apocalypse": 0,
+          "vitality": 0,
+          "ironSkin": 0,
+          "ward": 0,
+          "regen": 0,
+          "endurance": 0,
+          "barrier": 0,
+          "revive": 0,
+          "bulwark": 0,
+          "undying": 0,
+          "titanShell": 0,
+          "swiftness": 0,
+          "focus": 0,
+          "pathfinder": 0,
+          "quickstep": 0,
+          "momentum": 0,
+          "warpStride": 0,
+          "blink": 0,
+          "phaseShift": 0,
+          "phantomRush": 0,
+          "timeWarp": 0,
+          "fortune": 0,
+          "scholar": 0,
+          "scavenger": 0,
+          "prospector": 0,
+          "merchant": 0,
+          "banker": 0,
+          "alchemy": 0,
+          "dragonHoard": 0,
+          "midasTouch": 0,
+          "wealthSigil": 0,
+          "rescue": 0,
+          "rallyCry": 0,
+          "banner": 0,
+          "tactician": 0,
+          "guardianLink": 0,
+          "sharedFate": 0,
+          "medic": 0,
+          "commandAura": 0,
+          "warlordOath": 0,
+          "phoenixBond": 0,
+          "eclipse": 0,
+          "voidTouched": 0,
+          "crown": 0,
+          "voidcraft": 0,
+          "entropyWell": 0,
+          "moonRite": 0,
+          "abyssalPact": 0,
+          "stellarForge": 0,
+          "finalOath": 0,
+          "oblivionCrown": 0
+        },
+        "unlockedHeroes": [
+          "astrid",
+          "mara",
+          "noct"
+        ],
+        "unlockedRelics": [],
+        "storyProgress": {
+          "unlockedChapter": 1,
+          "cleared": []
+        },
+        "bestScore": 0,
+        "lastHero": "astrid",
+        "friends": [],
+        "friendRequests": {
+          "incoming": [],
+          "outgoing": []
+        },
+        "seen": {
+          "monsters": [],
+          "bosses": [],
+          "chapters": []
+        },
+        "stats": {
+          "runs": 0,
+          "victories": 0,
+          "kills": 0
+        }
+      }
+    }
+  },
+  "usernameIndex": {
+    "生当鼎食死封侯": "98e9fbe6-9489-42fc-b5ea-fb327438ba02"
+  },
+  "sessions": {
+    "df2d70c3625ca564d812e2997b7fb040ed88c072da50d9be22eedf5391103f7c": {
+      "userId": "86424527-ec71-41c5-ab15-3b6341295ce3",
+      "expires": 1778065542727
+    },
+    "05d17e7c259b85d544bcd1ce9da2a3363ba02a6bb8577edff44d772acd573cdb": {
+      "userId": "ba6f0124-f1fd-4d7e-8bee-d98b305d86c8",
+      "expires": 1778065599071
+    },
+    "ac650f028bee30d4c2c1c8b8890576487cab09f79f844a54c8e5f406a33d7f92": {
+      "userId": "e0398c9a-783d-4dd2-95ee-ba03a9ff35a9",
+      "expires": 1778065600330
+    },
+    "cbdca1615346cbda77b2e4497120d7251a34ec53d80b1def2c9a31e0eb83ac6d": {
+      "userId": "693987ae-d2d6-4028-85b2-bd72b5e4f27e",
+      "expires": 1778065651786
+    },
+    "305381c152fd201242ee9a0e3c926e6247129d57215a37d02c19e67edac46e3b": {
+      "userId": "1254a299-75d6-404a-8bec-408f7a4f10be",
+      "expires": 1778065653049
+    },
+    "21ef5160d331f2a54d699a8a21c6d079e7ab58fc81d502e55680c92ea0f1c968": {
+      "userId": "a374faad-9820-4fd9-a6a0-4b1a26f861f7",
+      "expires": 1778065678949
+    },
+    "dc18229d22611a5024cdeadd0be30a8364b83ff96b6653766412d82613a05610": {
+      "userId": "96ed47d7-48b0-4813-af80-62b39aa6ed42",
+      "expires": 1778065680167
+    },
+    "e4320b313b40b3008bbcf4d4daf1e05d1c6e6ebb9040f714cb6cc078b8d5aac3": {
+      "userId": "1d7f186f-014a-48bf-ad25-9fe337633157",
+      "expires": 1778065705776
+    },
+    "3356db42bdead15f4ba178c5740e32a634190aed9325fca519349f3371f345f8": {
+      "userId": "fb160def-ef48-4740-a783-e0e657885588",
+      "expires": 1778065706996
+    },
+    "52f1f081243a96ed41cdd09b3f3e57faac84f66c7903cdebd95cc4b1a7f8e92b": {
+      "userId": "73d62832-ec1e-4618-823e-539b309c7154",
+      "expires": 1778065809626
+    },
+    "36978b86991e9a3fccf5e7cc30d1574e1928aad14c66bc7cac3ac5ad7a694b79": {
+      "userId": "fe735bd9-c3d0-4010-b44a-1e6d7cc304cc",
+      "expires": 1778065901920
+    },
+    "c817e0eb0796867e56c27dd3731a6e21862d373ecdbadf7bd8f4caf54393fa2a": {
+      "userId": "dc143870-0910-43a9-adbd-4bbb3d5759af",
+      "expires": 1778065902274
+    },
+    "8531a217e047abb76066674f51023a7e6f553756cfce8cd9874cc4e3c31efded": {
+      "userId": "fbdd3ea2-4d34-42d8-9f4c-3ce0af5e43a7",
+      "expires": 1778065902755
+    },
+    "3324c16f8c7f67e67a1796181247831dc5ae3608d8497850d468d401f72d16d5": {
+      "userId": "a43361fd-c5bf-451c-96a1-a954037cd0af",
+      "expires": 1778065903291
+    },
+    "fc309aa143fc8951bd45dbbc3e1a471c39600d2ec1049bf86e375f8fdd9fd9a3": {
+      "userId": "65e5bd81-a5cf-42c2-b32c-7ac2fb04d348",
+      "expires": 1778065903816
+    },
+    "7aae82639d5b1e954ab7109b97c3f000a2da5cdbbf154ad03f13daf8c939c567": {
+      "userId": "f4950672-6074-44e4-8d27-fe106c5b8088",
+      "expires": 1778142904053
+    },
+    "2538eb48ea673657093bf564c39ad9b25018941658f23acf923297225304aa93": {
+      "userId": "fdcc0bf6-e2bd-4919-afa8-5991a7976cb4",
+      "expires": 1778143325534
+    },
+    "6453fbe35f1a5b95fa1b92270f2f8a888829295ae523a390db645e819b6b3eee": {
+      "userId": "1835987c-aea0-483d-93d5-137e7b2549c4",
+      "expires": 1778143445869
+    },
+    "cb98a237f58747b83aab514b64bcec16a437482668375cef3e0d1bcbdbf07af8": {
+      "userId": "f5b6a98a-2d71-4add-93a3-4a390858e4e4",
+      "expires": 1778144472906
+    },
+    "79286f8e1edba01382453c52bb07f26bb1af66668bdfc9f9ce02249d4d79c5c1": {
+      "userId": "715629ff-c5de-4e6f-bdaf-b5e165419f4c",
+      "expires": 1778828721372
+    },
+    "82d74cf588c393fc3715bdcbb01380def85746f70a52138f761f98b46726ad42": {
+      "userId": "98e9fbe6-9489-42fc-b5ea-fb327438ba02",
+      "expires": 1778833553056
+    }
+  },
+  "leaderboard": [
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "赤烬修道院·初醒",
+      "chapterId": 3,
+      "score": 3184,
+      "kills": 144,
+      "time": 127,
+      "victory": true,
+      "modifiers": [],
+      "day": "2026-04-30",
+      "at": 1777542691356
+    },
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "裂翼墓园·初醒",
+      "chapterId": 2,
+      "score": 2673,
+      "kills": 115,
+      "time": 78,
+      "victory": true,
+      "at": 1777539457594
+    },
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原·初醒",
+      "chapterId": 1,
+      "score": 2337,
+      "kills": 103,
+      "time": 61,
+      "victory": true,
+      "at": 1777538225368
+    },
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原·初醒",
+      "chapterId": 1,
+      "score": 2327,
+      "kills": 105,
+      "time": 39,
+      "victory": true,
+      "at": 1777538757865
+    },
+    {
+      "mode": "story",
+      "username": "376173004",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原·初醒",
+      "chapterId": 1,
+      "score": 2327,
+      "kills": 105,
+      "time": 39,
+      "victory": true,
+      "at": 1777538757865
+    },
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "虚空矿井·初醒",
+      "chapterId": 4,
+      "score": 2014,
+      "kills": 97,
+      "time": 81,
+      "victory": false,
+      "modifiers": [],
+      "day": "2026-05-08",
+      "at": 1778217778664
+    },
+    {
+      "mode": "story",
+      "username": "q0x45627",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 1618,
+      "kills": 160,
+      "time": 48,
+      "victory": false,
+      "at": 1777461165994
+    },
+    {
+      "mode": "story",
+      "username": "q1x45627",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 1618,
+      "kills": 160,
+      "time": 48,
+      "victory": false,
+      "at": 1777461165994
+    },
+    {
+      "mode": "story",
+      "username": "q2x45627",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 1618,
+      "kills": 160,
+      "time": 48,
+      "victory": false,
+      "at": 1777461165994
+    },
+    {
+      "mode": "story",
+      "username": "q3x45627",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 1618,
+      "kills": 160,
+      "time": 48,
+      "victory": false,
+      "at": 1777461165994
+    },
+    {
+      "mode": "story",
+      "username": "q4x45627",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 1618,
+      "kills": 160,
+      "time": 48,
+      "victory": false,
+      "at": 1777461165994
+    },
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "虚空矿井·初醒",
+      "chapterId": 4,
+      "score": 880,
+      "kills": 28,
+      "time": 45,
+      "victory": false,
+      "modifiers": [],
+      "day": "2026-05-07",
+      "at": 1778165832935
+    },
+    {
+      "mode": "story",
+      "username": "host26942",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 867,
+      "kills": 76,
+      "time": 49,
+      "victory": false,
+      "at": 1777460916285
+    },
+    {
+      "mode": "story",
+      "username": "mate26942",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 867,
+      "kills": 76,
+      "time": 49,
+      "victory": false,
+      "at": 1777460916285
+    },
+    {
+      "mode": "story",
+      "username": "rehost18367",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 836,
+      "kills": 72,
+      "time": 50,
+      "victory": false,
+      "at": 1777460944080
+    },
+    {
+      "mode": "story",
+      "username": "remate18367",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 836,
+      "kills": 72,
+      "time": 50,
+      "victory": false,
+      "at": 1777460944080
+    },
+    {
+      "mode": "story",
+      "username": "rh29873",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 822,
+      "kills": 70,
+      "time": 51,
+      "victory": false,
+      "at": 1777460972513
+    },
+    {
+      "mode": "story",
+      "username": "rm29873",
+      "hero": "星铸猎人",
+      "chapter": "银雾荒原",
+      "chapterId": 1,
+      "score": 822,
+      "kills": 70,
+      "time": 51,
+      "victory": false,
+      "at": 1777460972513
+    },
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "虚空矿井·初醒",
+      "chapterId": 4,
+      "score": 425,
+      "kills": 10,
+      "time": 31,
+      "victory": false,
+      "modifiers": [],
+      "day": "2026-05-08",
+      "at": 1778210787566
+    },
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "虚空矿井·初醒",
+      "chapterId": 4,
+      "score": 319,
+      "kills": 4,
+      "time": 15,
+      "victory": false,
+      "modifiers": [],
+      "day": "2026-05-07",
+      "at": 1778168467959
+    },
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "虚空矿井·初醒",
+      "chapterId": 4,
+      "score": 96,
+      "kills": 5,
+      "time": 14,
+      "victory": false,
+      "modifiers": [],
+      "day": "2026-04-30",
+      "at": 1777542719998
+    },
+    {
+      "mode": "story",
+      "username": "123456",
+      "hero": "星铸猎人",
+      "chapter": "赤烬修道院·初醒",
+      "chapterId": 3,
+      "score": 78,
+      "kills": 3,
+      "time": 12,
+      "victory": false,
+      "at": 1777539594568
+    }
+  ],
+  "verificationCodes": {}
+}
