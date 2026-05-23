@@ -111,6 +111,13 @@ function loadStore() {
 
 function saveStore() {
   fs.mkdirSync(dataDir, { recursive: true });
+  // 创建备份（仅隔 5 分钟以上才写）
+  try {
+    const bak = `${storePath}.${Date.now()}`;
+    if (fs.existsSync(storePath)) fs.copyFileSync(storePath, bak);
+    const backups = fs.readdirSync(dataDir).filter(f => f.startsWith("store.json.")).sort().reverse();
+    for (let i = 5; i < backups.length; i++) fs.unlinkSync(path.join(dataDir, backups[i]));
+  } catch {}
   const tmp = `${storePath}.tmp`;
   fs.writeFileSync(tmp, JSON.stringify(store, null, 2));
   fs.renameSync(tmp, storePath);
