@@ -228,14 +228,19 @@
   // ── 伤害数字 ──
   const damageNumbers = [];
   function spawnDamageNumber(x, y, value, color = "#f4c95d", big = false) {
-    if (damageNumbers.length > 50) return; // 上限
+    if (damageNumbers.length > 50) return;
     damageNumbers.push({
       x, y, value: Math.round(value),
       vy: -60 - Math.random() * 30,
       life: 0.8, maxLife: 0.8,
       color, big,
-      offsetX: (Math.random() - 0.5) * 20
+      offsetX: (Math.random() - 0.5) * 20,
+      spawnTime: performance.now()
     });
+    if (big) {
+      spawnParticles(x, y, color, 6, { speed: 80, life: 0.4, size: 3 });
+      triggerShake(4);
+    }
   }
 
   function triggerShake(intensity) {
@@ -2090,6 +2095,7 @@
       drawEffects();
       drawDamageNumbers();
       drawParticles();
+      drawEdgeIndicators();
       drawVignette();
       drawKillStreakHud();
       drawBossBar();
@@ -2603,7 +2609,72 @@
     }
   }
 
-  function drawEffects() {
+    // ── 屏幕边缘指示器 ──
+  function drawEdgeIndicators() {
+    const w = state.width, h = state.height;
+    const margin = 40;
+    const now = performance.now();
+    const targets = [];
+    if (state.room) {
+      for (const enemy of state.room.enemies || []) {
+        if (enemy.hp <= 0) continue;
+        const sp = world(enemy.x, enemy.y);
+        if (sp.x < -20 || sp.x > w + 20 || sp.y < -20 || sp.y > h + 20) {
+          targets.push({ x: sp.x, y: sp.y, color: enemy.color || "#d3424f", boss: enemy.boss });
+        }
+      }
+      for (const m of state.room.members || []) {
+        if (state.you && m.key === state.you.key) continue;
+        const sp = world(m.x, m.y);
+        if (sp.x < -10 || sp.x > w + 10 || sp.y < -10 || sp.y > h + 10) {
+          targets.push({ x: sp.x, y: sp.y, color: "#7fe0c4", boss: false });
+        }
+      }
+    }
+    const sorted = targets.sort((a, b) => {
+      const da = Math.hypot(a.x - w/2, a.y - h/2);
+      const db = Math.hypot(b.x - w/2, b.y - h/2);
+      return da - db;
+    }).slice(0, 8);
+    for (const t of sorted) {
+      const angle = Math.atan2(t.y - h/2, t.x - w/2);
+      const edgeDist = [
+        { d: Math.abs((margin - t.x) / Math.cos(angle || 0.01)), x: margin, y: h/2 + Math.tan(angle) * (margin - w/2) },
+        { d: Math.abs((w - margin - t.x) / Math.cos(angle || 0.01)), x: w - margin, y: h/2 + Math.tan(angle) * (w - margin - w/2) },
+        { d: Math.abs((margin - t.y) / Math.sin(angle || 0.01)), y: margin, x: w/2 + (margin - h/2) / Math.tan(angle || 0.01) },
+        { d: Math.abs((h - margin - t.y) / Math.sin(angle || 0.01)), y: h - margin, x: w/2 + (h - margin - h/2) / Math.tan(angle || 0.01) }
+      ];
+      let best = edgeDist.reduce((a, b) => a.d < b.d ? a : b);
+      best.x = Math.max(margin, Math.min(w - margin, best.x || margin));
+      best.y = Math.max(margin, Math.min(h - margin, best.y || margin));
+      const pulse = 0.6 + Math.sin(now / 300 + angle) * 0.4;
+      ctx.save();
+      ctx.globalAlpha = pulse * 0.7;
+      ctx.translate(best.x, best.y);
+      ctx.rotate(angle);
+      ctx.fillStyle = t.color;
+      ctx.shadowColor = t.color;
+      ctx.shadowBlur = t.boss ? 16 : 8;
+      ctx.beginPath();
+      ctx.moveTo(10, 0);
+      ctx.lineTo(-4, -6);
+      ctx.lineTo(-4, 6);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      if (t.boss) {
+        ctx.save();
+        ctx.globalAlpha = 0.7;
+        ctx.fillStyle = t.color;
+        ctx.font = "bold 10px Microsoft YaHei, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("BOSS", best.x, best.y + 16);
+        ctx.restore();
+      }
+    }
+  }
+
+function drawEffects() {
     for (const effect of state.room.effects) {
       const p = world(effect.x, effect.y);
       const progress = 1 - effect.life / 0.6;
@@ -2813,15 +2884,29 @@
       const p = world(d.x, d.y);
       const alpha = Math.max(0, d.life / d.maxLife);
       const rise = (1 - d.life / d.maxLife) * 20;
+      const t = 1 - d.life / d.maxLife;
       ctx.save();
       ctx.globalAlpha = alpha;
       ctx.textAlign = "center";
       ctx.fillStyle = d.color;
       ctx.shadowColor = d.color;
-      ctx.shadowBlur = d.big ? 12 : 6;
-      const size = d.big ? 18 : 13;
-      ctx.font = `900 ${size}px Microsoft YaHei, sans-serif`;
-      ctx.fillText(d.value, p.x + d.offsetX, p.y - rise);
+      ctx.shadowBlur = d.big ? 18 : 6;
+      const size = d.big ? 20 : 13;
+      ctx.font = "900 " + size + "px Microsoft YaHei, sans-serif";
+      const dx = p.x + d.offsetX;
+      const dy = p.y - rise;
+      if (d.big) {
+        const bounce = 1 + Math.sin(t * Math.PI * 3) * 0.15 * (1 - t);
+        ctx.translate(dx, dy);
+        ctx.scale(bounce, bounce);
+        ctx.shadowBlur = 24;
+        ctx.strokeStyle = "rgba(0,0,0,0.4)";
+        ctx.lineWidth = 3;
+        ctx.strokeText(d.value, 0, 0);
+        ctx.fillText(d.value, 0, 0);
+      } else {
+        ctx.fillText(d.value, dx, dy);
+      }
       ctx.restore();
     }
   }
