@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    container_name: eclipse-survivor
+    ports:
+      - "5173:5173"
+    environment:
+      - MAIL_USER=${MAIL_USER:-}
+      - MAIL_PASS=${MAIL_PASS:-}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:5173/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
