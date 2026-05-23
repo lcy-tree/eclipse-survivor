@@ -245,13 +245,16 @@ const roomModifiers = [
   { id: "nightHunt", type: "debuff", name: "夜猎追缉", desc: "敌人速度 +14%，得分 +15%", effects: { enemySpeed: 1.14, score: 1.15 } },
   { id: "sealedRelics", type: "debuff", name: "封印遗物", desc: "升级间隔变长，通关奖励 +22%", effects: { xpNeed: 1.18, reward: 1.22 } },
   { id: "frenzyTide", type: "debuff", name: "狂潮涌动", desc: "每批刷怪 +3，得分 +25%", effects: { swarm: 3, score: 1.25 } },
-  { id: "voidExposure", type: "debuff", name: "虚空侵蚀", desc: "精英出现率 +20%，击杀精英经验 +35%", effects: { eliteRate: 1.2, eliteXp: 1.35 } }
+  { id: "voidExposure", type: "debuff", name: "虚空侵蚀", desc: "精英出现率 +20%，击杀精英经验 +35%", effects: { eliteRate: 1.2, eliteXp: 1.35 } },
+  { id: "crystalArmor", type: "buff", name: "水晶壁垒", desc: "全队减伤 +15%，但移速 -8%", effects: { armor: 1.15, speed: 0.92 } },
+  { id: "shadowWeaver", type: "debuff", name: "暗影编织", desc: "敌人速度 +20% 且攻击附带灼烧，通关月尘 +30%", effects: { enemySpeed: 1.2, reward: 1.3 } }
 ];
 
 const difficulties = [
   { id: "normal", name: "普通", desc: "标准挑战", hpMul: 1, scoreMul: 1, rewardMul: 1 },
   { id: "hard", name: "困难", desc: "怪物血量+50%", hpMul: 1.5, scoreMul: 1.4, rewardMul: 1.3 },
-  { id: "nightmare", name: "噩梦", desc: "怪物血量+120%", hpMul: 2.2, scoreMul: 2, rewardMul: 1.8 }
+  { id: "nightmare", name: "噩梦", desc: "怪物血量+120%", hpMul: 2.2, scoreMul: 2, rewardMul: 1.8 },
+  { id: "hell", name: "地狱", desc: "怪物血量+200%，速度+20%", hpMul: 3, scoreMul: 3, rewardMul: 2.5 }
 ];
 
 const coopAchievements = [
@@ -303,7 +306,9 @@ const encyclopedia = {
     { name: "月亮碎片", desc: "中章节随机事件：在附近生成多个治疗道具，危机时刻的补给。" },
     { name: "时空裂隙", desc: "高章节随机事件：出现高伤害区域，但周围散布大量经验星，高风险高回报。" },
     { name: "狂暴之潮", desc: "敌人攻击间隔缩短，需要更频繁走位躲避。" },
-    { name: "瞬移猎手", desc: "精英敌人会周期性短距传送，难以风筝。" }
+    { name: "瞬移猎手", desc: "精英敌人会周期性短距传送，难以风筝。" },
+    { name: "水晶壁垒", desc: "房间词条：全队获得减伤但移速降低，适合稳扎稳打。" },
+    { name: "暗影编织", desc: "房间词条：敌人更快且附带灼烧，但通关回报更高。" }
   ],
   monsters: Object.entries(enemyDefs).map(([id, def]) => ({
     id, name: def.name,
