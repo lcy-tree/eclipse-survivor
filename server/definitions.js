@@ -227,7 +227,12 @@ const evolutionDefs = [
   { id: "ironBloom", name: "铁花绽放", needs: ["vitality", "aura"], desc: "生命和范围阵满级后，受伤时触发一次额外范围伤害" },
   { id: "soulHarvest", name: "灵魂收割", needs: ["curse", "lifesteal"], desc: "诅咒和吸血满级后，击杀精英额外回复生命并永久提高伤害" },
   { id: "starForge", name: "星辰锻造", needs: ["orbit", "shield"], desc: "月环刃和护盾满级后，月刃旋转期间获得额外减伤" },
-  { id: "crimsonTide", name: "赤潮漩涡", needs: ["thorns", "vitality"], desc: "反伤和生命满级后，每损失 10% 生命提升反伤效果" }
+  { id: "crimsonTide", name: "赤潮漩涡", needs: ["thorns", "vitality"], desc: "反伤和生命满级后，每损失 10% 生命提升反伤效果" },
+  { id: "shadowServant", name: "暗影侍从", needs: ["guardian", "curse"], desc: "召唤和诅咒满级后，光灵攻击附带易伤效果" },
+  { id: "windTrail", name: "风影无踪", needs: ["dash", "speed"], desc: "冲刺和速度满级后，移动时留下持续伤害轨迹" },
+  { id: "ironVow", name: "铁卫誓约", needs: ["guardian", "might"], desc: "召唤和伤害满级后，光灵召唤数量+1并造成范围伤害" },
+  { id: "chainSky", name: "雷链天网", needs: ["chain", "range"], desc: "弹射和射程满级后，弹射距离无限且每次弹射增伤" },
+  { id: "verdantWard", name: "翠绿壁垒", needs: ["guardian", "recovery"], desc: "召唤和回复满级后，光灵可治疗附近队友" }
 ];
 
 const roomModifiers = [
@@ -288,6 +293,11 @@ const encyclopedia = {
     { name: "灵魂收割", desc: "进化联动：诅咒和吸血满级后，击杀精英额外回血并永久提高伤害。" },
     { name: "星辰锻造", desc: "进化联动：月环刃和护盾满级后，月刃旋转期间获得额外减伤。" },
     { name: "赤潮漩涡", desc: "进化联动：反伤和生命满级后，每损失 10% 生命提升反伤效果。" },
+    { name: "暗影侍从", desc: "进化联动：召唤和诅咒满级后，光灵攻击附带易伤效果。" },
+    { name: "风影无踪", desc: "进化联动：冲刺和速度满级后，移动时留下持续伤害轨迹。" },
+    { name: "铁卫誓约", desc: "进化联动：召唤和伤害满级后，光灵召唤数量+1并造成范围伤害。" },
+    { name: "雷链天网", desc: "进化联动：弹射和射程满级后，弹射距离无限且每次弹射增伤。" },
+    { name: "翠绿壁垒", desc: "进化联动：召唤和回复满级后，光灵可治疗附近队友。" },
     { name: "生命回响", desc: "房间词条：救援倒地队友更快，倒地惩罚更低，适合新手。" },
     { name: "虚空侵蚀", desc: "房间词条：精英敌人更多但击杀精英给更多经验，适合精英猎手。" },
     { name: "月亮碎片", desc: "中章节随机事件：在附近生成多个治疗道具，危机时刻的补给。" },

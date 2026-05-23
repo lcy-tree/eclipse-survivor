@@ -1,0 +1,15 @@
+{
+  "name": "月蚀幸存者",
+  "short_name": "月蚀幸存者",
+  "description": "Roguelite 生存游戏，在月蚀世界中战斗与进化",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0810",
+  "theme_color": "#0a0810",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%2309090c'/><path d='M42 9c-9 3-15 11-15 21s6 18 15 21c-14 4-28-6-28-21S28 5 42 9Z' fill='%23f4c95d'/></svg>", "sizes": "64x64", "type": "image/svg+xml" },
+    { "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='36' fill='%2309090c'/><path d='M126 27c-27 9-45 33-45 63s18 54 45 63c-42 12-84-18-84-63S84 15 126 27Z' fill='%23f4c95d'/></svg>", "sizes": "192x192", "type": "image/svg+xml" },
+    { "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='96' fill='%2309090c'/><path d='M336 72c-72 24-120 88-120 168s48 144 120 168c-112 32-224-48-224-168S224 40 336 72Z' fill='%23f4c95d'/></svg>", "sizes": "512x512", "type": "image/svg+xml" }
+  ]
+}

@@ -289,6 +289,9 @@
     await loadFriends().catch(() => {});
     renderAll();
     routeFromHash();
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    }
     requestAnimationFrame(loop);
   }
 
