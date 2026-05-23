@@ -90,7 +90,11 @@
     roomList: document.getElementById("room-list"),
     chatMessages: document.getElementById("chat-messages"),
     chatInput: document.getElementById("chat-input"),
-    chatSend: document.getElementById("chat-send")
+    chatSend: document.getElementById("chat-send"),
+    pauseScreen: document.getElementById("pause-screen"),
+    pauseResume: document.getElementById("pause-resume"),
+    pauseRestart: document.getElementById("pause-restart"),
+    pauseQuit: document.getElementById("pause-quit")
   };
 
   const TAU = Math.PI * 2;
@@ -1459,7 +1463,9 @@
     ui.timer.textContent = formatTime(room.time);
     if (room.paused) {
       ui.chapterName.textContent = "⏸ 已暂停";
+      ui.pauseScreen?.classList.remove("hidden");
       ui.chapterName.style.color = "var(--gold)";
+      ui.pauseScreen?.classList.add("hidden");
       ui.pauseButton.textContent = "▶";
     } else {
       ui.chapterName.textContent = room.chapter.name;
@@ -1895,6 +1901,25 @@
         backToMenu();
       }
     });
+    if (ui.pauseResume) {
+      ui.pauseResume.addEventListener("click", () => {
+        send("togglePause");
+      });
+    }
+    if (ui.pauseRestart) {
+      ui.pauseRestart.addEventListener("click", () => {
+        ui.pauseScreen?.classList.add("hidden");
+        send("togglePause");
+        backToMenu();
+      });
+    }
+    if (ui.pauseQuit) {
+      ui.pauseQuit.addEventListener("click", () => {
+        ui.pauseScreen?.classList.add("hidden");
+        send("togglePause");
+        backToMenu();
+      });
+    }
     ui.muteButton.addEventListener("click", () => {
       state.muted = !state.muted;
       ui.muteButton.textContent = state.muted ? "×" : "♪";
@@ -1916,7 +1941,15 @@
       ui.chatInput?.addEventListener("keydown", e => { if (e.key === "Enter") sendChat(); });
     }
     window.addEventListener("hashchange", routeFromHash);
-    window.addEventListener("keydown", event => state.keys.add(event.code));
+    
+    window.addEventListener("keydown", event => {
+      if (event.code === "Escape" && state.room?.status === "running") {
+        event.preventDefault();
+        send("togglePause");
+        return;
+      }
+      state.keys.add(event.code);
+    });
     window.addEventListener("keyup", event => state.keys.delete(event.code));
     canvas.addEventListener("pointerdown", pointerDown);
     canvas.addEventListener("pointermove", pointerMove);

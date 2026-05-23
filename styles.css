@@ -1474,6 +1474,29 @@ p { color: var(--ink2); line-height: 1.6; }
 }
 
 /* ── 屏幕闪 ── */
+/* ── 暂停菜单 ── */
+.pause-screen {
+  background: rgba(6,5,13,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 30;
+}
+.pause-panel {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  min-width: 260px;
+}
+.pause-panel h2 {
+  font-size: 2rem; color: var(--gold); margin: 0;
+  text-shadow: 0 0 30px rgba(240,192,64,0.3);
+}
+.pause-hint {
+  color: var(--muted); margin: 0 0 8px 0; font-size: 0.85rem;
+}
+.pause-panel button {
+  min-width: 180px;
+}
+
 .screen-flash {
   position: fixed; inset: 0; z-index: 35;
   pointer-events: none; opacity: 0;
