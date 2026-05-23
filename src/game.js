@@ -1962,23 +1962,28 @@
   }
 
   function loop(now) {
-    const dt = Math.min(0.05, (now - state.last) / 1000 || 0);
-    state.last = now;
-    if (hitStopFrames > 0) {
-      hitStopFrames--;
+    try {
+      const dt = Math.min(0.05, (now - state.last) / 1000 || 0);
+      state.last = now;
+      if (hitStopFrames > 0) {
+        hitStopFrames--;
+        draw();
+        requestAnimationFrame(loop);
+        return;
+      }
+      updateInput(now);
+      updateSmooth(dt);
+      updateCamera(dt);
+      updateParticles(dt);
+      updateShake(dt);
+      updateFlash(dt);
+      updateKillStreak(dt);
+      updateDamageNumbers(dt);
       draw();
-      requestAnimationFrame(loop);
-      return;
+    } catch (error) {
+      console.error("渲染循环异常:", error);
+      state.last = now;
     }
-    updateInput(now);
-    updateSmooth(dt);
-    updateCamera(dt);
-    updateParticles(dt);
-    updateShake(dt);
-    updateFlash(dt);
-    updateKillStreak(dt);
-    updateDamageNumbers(dt);
-    draw();
     requestAnimationFrame(loop);
   }
 
