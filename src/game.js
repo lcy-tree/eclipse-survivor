@@ -124,6 +124,8 @@
     input: { x: 0, y: 0 },
     lastInputSent: 0,
     last: performance.now(),
+    showFps: false,
+    fps: { frames: 0, fps: 0, lastTime: 0 },
     muted: false,
     sounds: {},
     images: {},
@@ -1968,6 +1970,9 @@
     try {
       const dt = Math.min(0.05, (now - state.last) / 1000 || 0);
       state.last = now;
+      const sfps = state.fps;
+      sfps.frames++;
+      if (now - sfps.lastTime >= 1000) { sfps.fps = sfps.frames; sfps.frames = 0; sfps.lastTime = now; }
       if (hitStopFrames > 0) {
         hitStopFrames--;
         draw();
@@ -2093,6 +2098,16 @@
     }
     ctx.restore();
     drawFlash();
+    if (state.showFps) {
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fillRect(state.width - 110, 4, 106, 22);
+      ctx.fillStyle = '#98df62';
+      ctx.font = '13px monospace';
+      ctx.fillText('FPS: ' + state.fps.fps, state.width - 102, 20);
+      ctx.restore();
+    }
   }
 
   function drawBackground(palette) {
