@@ -7,11 +7,11 @@ const chapterThemes = [
   { zone: "赤烬修道院", goal: "夺回燃烧圣杯", boss: "赤烬院长", palette: ["#241713", "#4d2721", "#ff9658"], enemies: ["husk", "brute", "spitter"] },
   { zone: "虚空矿井", goal: "关闭地下裂隙", boss: "虚空掘墓人", palette: ["#141423", "#25294a", "#7bb8ff"], enemies: ["bat", "spitter", "shard"] },
   { zone: "月蚀王座", goal: "击碎王冠封印", boss: "月蚀王冠", palette: ["#201714", "#3c2b1a", "#f4c95d"], enemies: ["husk", "brute", "spitter", "shard"] },
-  { zone: "青灯竹径", goal: "点亮迷路青灯", boss: "竹影鬼将", palette: ["#142018", "#284231", "#98df62"], enemies: ["bat", "shard"] },
-  { zone: "沉钟水渠", goal: "敲响三口沉钟", boss: "溺钟祭司", palette: ["#101c24", "#203847", "#7bb8ff"], enemies: ["husk", "spitter"] },
-  { zone: "白骨驿站", goal: "护送旧王信标", boss: "骨驿骑士", palette: ["#1e1b18", "#3b3428", "#f6f0dc"], enemies: ["husk", "brute"] },
-  { zone: "猩红花庭", goal: "烧毁血蔷薇根", boss: "花庭女侯", palette: ["#25151b", "#4a2430", "#d3424f"], enemies: ["bat", "spitter", "shard"] },
-  { zone: "星坠天井", goal: "收集坠星核心", boss: "坠星巨像", palette: ["#171923", "#2c3047", "#f4c95d"], enemies: ["brute", "shard"] }
+  { zone: "青灯竹径", goal: "点亮迷路青灯", boss: "竹影鬼将", palette: ["#142018", "#284231", "#98df62"], enemies: ["bat", "shard", "suicide"] },
+  { zone: "沉钟水渠", goal: "敲响三口沉钟", boss: "溺钟祭司", palette: ["#101c24", "#203847", "#7bb8ff"], enemies: ["husk", "spitter", "mage"] },
+  { zone: "白骨驿站", goal: "护送旧王信标", boss: "骨驿骑士", palette: ["#1e1b18", "#3b3428", "#f6f0dc"], enemies: ["husk", "brute", "suicide"] },
+  { zone: "猩红花庭", goal: "烧毁血蔷薇根", boss: "花庭女侯", palette: ["#25151b", "#4a2430", "#d3424f"], enemies: ["bat", "spitter", "shard", "mage"] },
+  { zone: "星坠天井", goal: "收集坠星核心", boss: "坠星巨像", palette: ["#171923", "#2c3047", "#f4c95d"], enemies: ["brute", "shard", "summoner"] }
 ];
 
 function makeChapterAffixes(id) {
@@ -84,7 +84,10 @@ const enemyDefs = {
   bat: { name: "裂翼", hp: 28, speed: 128, damage: 7, radius: 13, xp: 3, color: "#7fe0c4", tile: 246 },
   brute: { name: "铁瘤", hp: 130, speed: 56, damage: 16, radius: 23, xp: 10, color: "#d3424f", tile: 269 },
   spitter: { name: "黯咒者", hp: 78, speed: 70, damage: 12, radius: 18, xp: 8, color: "#a98cff", tile: 275, ranged: true },
-  shard: { name: "晶群", hp: 62, speed: 112, damage: 12, radius: 15, xp: 7, color: "#7bb8ff", tile: 286 }
+  shard: { name: "晶群", hp: 62, speed: 112, damage: 12, radius: 15, xp: 7, color: "#7bb8ff", tile: 286 },
+  mage: { name: "黯术师", hp: 55, speed: 55, damage: 14, radius: 18, xp: 10, color: "#ff6b6b", tile: 292, ranged: true },
+  suicide: { name: "自爆者", hp: 35, speed: 160, damage: 25, radius: 14, xp: 5, color: "#ff4444", tile: 258 },
+  summoner: { name: "唤魔者", hp: 100, speed: 48, damage: 6, radius: 22, xp: 15, color: "#50c878", tile: 295 }
 };
 
 /* ── 天赋（6分支 × 10节点 = 60） ── */
@@ -308,11 +311,20 @@ const encyclopedia = {
     { name: "狂暴之潮", desc: "敌人攻击间隔缩短，需要更频繁走位躲避。" },
     { name: "瞬移猎手", desc: "精英敌人会周期性短距传送，难以风筝。" },
     { name: "水晶壁垒", desc: "房间词条：全队获得减伤但移速降低，适合稳扎稳打。" },
-    { name: "暗影编织", desc: "房间词条：敌人更快且附带灼烧，但通关回报更高。" }
+    { name: "暗影编织", desc: "房间词条：敌人更快且附带灼烧，但通关回报更高。" },
+    { name: "黯术师", desc: "高阶远程敌人，发射暗影弹幕。高章节地图才会出现，需要灵活走位躲避。" },
+    { name: "自爆者", desc: "失智的疯狂敌人，高速冲向玩家并爆炸造成范围伤害。听到滋滋声就要拉开距离。" },
+    { name: "唤魔者", desc: "能召唤小怪的指挥官型敌人，会持续生成雾骸助战。必须优先击杀以免被淹没。" }
   ],
   monsters: Object.entries(enemyDefs).map(([id, def]) => ({
     id, name: def.name,
-    desc: def.ranged ? "远程施法敌人，会在中距离发射弹幕。" : def.speed > 100 ? "高速追击敌人，适合用范围技能清理。" : def.hp > 100 ? "厚血近战敌人，常作为精英波次核心。" : "基础敌人，会持续向玩家靠近。",
+    desc: id === "mage" ? "远程施法敌人，会在中距离发射追踪弹幕，优先躲避攻击。" :
+      id === "suicide" ? "高速自爆敌人，接触后造成大范围爆炸伤害，务必优先击杀。" :
+      id === "summoner" ? "召唤型敌人，会不断召唤小怪，不优先处理会导致敌群失控。" :
+      def.ranged ? "远程施法敌人，会在中距离发射弹幕。" :
+      def.speed > 100 ? "高速追击敌人，适合用范围技能清理。" :
+      def.hp > 100 ? "厚血近战敌人，常作为精英波次核心。" :
+      "基础敌人，会持续向玩家靠近。",
     hp: def.hp, damage: def.damage, speed: def.speed
   })),
   bosses: chapterThemes.map((theme, index) => ({
@@ -399,6 +411,33 @@ function generateMonsterSvg(id, def) {
     body += `<line x1="70" y1="${60 + oy()}" x2="82" y2="${62 + oy()}" stroke="#0a0810" stroke-width="3" stroke-linecap="round"/>`;
     body += `<rect x="50" y="78" width="28" height="6" rx="3" fill="#0a0810"/>`;
     for (let i = 0; i < 5; i++) { body += `<line x1="10" y1="${10 + i * 24}" x2="118" y2="${10 + i * 24}" stroke="${dark}" stroke-width="0.5" opacity="0.08"/>`; body += `<line x1="${10 + i * 24}" y1="10" x2="${10 + i * 24}" y2="118" stroke="${dark}" stroke-width="0.5" opacity="0.08"/>`; }
+  } else if (id === "mage") {
+    body += `<circle cx="64" cy="60" r="24" fill="${c}" stroke="${dark}" stroke-width="2"/>`;
+    body += `<path d="M38 70 L28 54 L42 48L40 60Z" fill="${c}" opacity="0.9"/>`;
+    body += `<circle cx="${56 + ox()}" cy="${54 + oy()}" r="3.5" fill="#0a0810"/><circle cx="${72 + ox()}" cy="${54 + oy()}" r="3.5" fill="#0a0810"/>`;
+    body += `<circle cx="64" cy="44" r="5" fill="${light}" opacity="0.8"/>`;
+    for (let i = 0; i < 3; i++) body += `<circle cx="${64 + Math.cos(i * 2.1) * 34}" cy="${60 + Math.sin(i * 2.1) * 28}" r="${5 + i * 2}" fill="${c}" opacity="0.15"/>`;
+    body += `<path d="M46 74 L50 68 L54 74 L58 68 L62 74 L66 68 L70 74 L74 68 L78 74" stroke="${light}" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/>`;
+    for (let i = 0; i < 8; i++) body += `<circle cx="${16 + (i % 4) * 32}" cy="${14 + Math.floor(i / 4) * 48}" r="1.5" fill="${c}" opacity="0.12"/>`;
+  } else if (id === "suicide") {
+    body += `<circle cx="64" cy="60" r="18" fill="${c}" stroke="${dark}" stroke-width="2.5"/>`;
+    body += `<circle cx="64" cy="60" r="28" fill="none" stroke="${c}" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.3"/>`;
+    body += `<circle cx="${56 + ox()}" cy="${54 + oy()}" r="3" fill="#0a0810"/><circle cx="${72 + ox()}" cy="${54 + oy()}" r="3" fill="#0a0810"/>`;
+    body += `<rect x="58" y="72" width="12" height="4" rx="2" fill="#0a0810"/>`;
+    body += `<circle cx="64" cy="42" r="3" fill="${light}" opacity="0.7"/>`;
+    body += `<line x1="38" y1="50" x2="28" y2="40" stroke="${c}" stroke-width="2" stroke-linecap="round" opacity="0.5"/>`;
+    body += `<line x1="90" y1="50" x2="100" y2="40" stroke="${c}" stroke-width="2" stroke-linecap="round" opacity="0.5"/>`;
+    body += `<path d="M30 80 L50 70 L50 90Z M98 80 L78 70 L78 90Z" fill="${c}" opacity="0.4"/>`;
+    for (let i = 0; i < 10; i++) body += `<line x1="${64 + (rng() - 0.5) * 56}" y1="${60 + (rng() - 0.5) * 56}" x2="64" y2="60" stroke="${c}" stroke-width="0.8" opacity="0.15"/>`;
+  } else if (id === "summoner") {
+    body += `<ellipse cx="64" cy="62" rx="26" ry="30" fill="${c}" stroke="${dark}" stroke-width="2"/>`;
+    body += `<circle cx="64" cy="${38 + oy()}" r="6" fill="${light}" opacity="0.8"/>`;
+    body += `<circle cx="${54 + ox()}" cy="${56 + oy()}" r="3.5" fill="#0a0810"/><circle cx="${74 + ox()}" cy="${56 + oy()}" r="3.5" fill="#0a0810"/>`;
+    body += `<rect x="55" y="76" width="18" height="8" rx="3" fill="#0a0810"/>`;
+    body += `<path d="M64 82 L56 96 L72 96Z" fill="${c}" opacity="0.6"/>`;
+    for (let i = 0; i < 3; i++) body += `<circle cx="${50 + i * 14}" cy="${44}" r="4" fill="${light}" opacity="${0.2 + i * 0.15}"/>`;
+    body += `<ellipse cx="64" cy="62" rx="38" ry="40" fill="none" stroke="${c}" stroke-width="0.8" stroke-dasharray="3 5" opacity="0.2"/>`;
+    for (let i = 0; i < 6; i++) body += `<circle cx="${20 + rng() * 88}" cy="${16 + rng() * 96}" r="${1 + rng() * 2}" fill="${c}" opacity="0.1"/>`;
   } else if (id === "spitter") {
     body += `<ellipse cx="64" cy="64" rx="22" ry="28" fill="${c}" stroke="${dark}" stroke-width="2"/>`;
     body += `<circle cx="64" cy="${40 + oy()}" r="5" fill="${light}" opacity="0.9"/>`;

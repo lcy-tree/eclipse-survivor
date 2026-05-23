@@ -2881,7 +2881,7 @@
   }
 
   function drawEnemySprite(enemy, x, y, size) {
-    if (!enemy.boss && state.images.pig?.complete && state.images.pig.naturalWidth && (enemy.type === "bat" || enemy.type === "husk")) {
+    if (!enemy.boss && state.images.pig?.complete && state.images.pig.naturalWidth && (enemy.type === 'bat' || enemy.type === 'husk')) {
       const frame = Math.floor(performance.now() / 180) % 2;
       ctx.save();
       ctx.imageSmoothingEnabled = false;
@@ -2891,11 +2891,22 @@
       ctx.restore();
       return;
     }
-    if ((enemy.boss || enemy.type === "brute" || enemy.type === "spitter") && state.images.samuraiBlue?.complete && state.images.samuraiBlue.naturalWidth) {
+    // 自爆者：快速闪烁红色脉冲光效
+    if (!enemy.boss && enemy.type === 'suicide' && state.images.pig?.complete && state.images.pig.naturalWidth) {
+      const frame = Math.floor(performance.now() / 100) % 2;
+      ctx.save();
+      ctx.imageSmoothingEnabled = false;
+      ctx.shadowColor = '#ff4444';
+      ctx.shadowBlur = 16 + Math.sin(performance.now() / 150) * 10;
+      ctx.drawImage(state.images.pig, frame * 16, 0, 16, 16, x - size / 2, y - size / 2, size, size);
+      ctx.restore();
+      return;
+    }
+    if ((enemy.boss || enemy.type === 'brute' || enemy.type === 'spitter' || enemy.type === 'mage' || enemy.type === 'summoner') && state.images.samuraiBlue?.complete && state.images.samuraiBlue.naturalWidth) {
       const frameW = 16;
       const frameH = 16;
       const col = Math.floor(performance.now() / 160) % 4;
-      const row = enemy.boss ? 5 : enemy.type === "spitter" ? 3 : 1;
+      const row = enemy.boss ? 5 : enemy.type === 'spitter' || enemy.type === 'mage' ? 3 : 4;
       const drawSize = enemy.boss ? size : size * 1.15;
       ctx.save();
       ctx.imageSmoothingEnabled = false;

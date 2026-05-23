@@ -1052,6 +1052,42 @@ function updateEnemies(room, dt) {
       enemy.hp = Math.min(enemy.maxHp, enemy.hp + enemy.maxHp * 0.005 * dt);
     }
 
+    // 自爆者：接近玩家时自爆造成范围伤害
+    if (enemy.type === "suicide" && d < enemy.radius + 40 && enemy.hp > 0) {
+      for (const member of alive) {
+        const md = utils.distance(member, enemy);
+        if (md < 130) {
+          const falloff = 1 - md / 130;
+          member.hp -= enemy.damage * 2.5 * falloff * dt * 20;
+        }
+      }
+      room.effects.push(effect("boss", enemy.x, enemy.y, "#ff4444"));
+      enemy.hp = 0;
+      continue;
+    }
+
+    // 唤魔者：周期性召唤小怪
+    if (enemy.type === "summoner" && enemy.hp > 0) {
+      if (enemy.summonCd === undefined) enemy.summonCd = 2 + Math.random();
+      enemy.summonCd -= dt;
+      if (enemy.summonCd <= 0) {
+        const count = 2 + Math.floor(Math.min(room.time / 90, 3));
+        for (let i = 0; i < count; i++) {
+          const ang = Math.random() * Math.PI * 2;
+          const dist = 25 + Math.random() * 30;
+          room.enemies.push({
+            id: nextId(), type: "husk", name: "雾骸·召唤",
+            x: enemy.x + Math.cos(ang) * dist, y: enemy.y + Math.sin(ang) * dist,
+            hp: 30 + room.chapter.id * 3, maxHp: 30 + room.chapter.id * 3,
+            speed: 80, damage: 6, radius: 12, xp: 1,
+            color: "#d4ceb2", tile: 242, ranged: false, cd: 1, boss: false
+          });
+        }
+        room.effects.push(effect("spark", enemy.x, enemy.y, "#50c878"));
+        enemy.summonCd = 3.5 + Math.random() * 1.5;
+      }
+    }
+
     if ((enemy.ranged || enemy.boss) && enemy.cd <= 0 && d < 760) {
       fireEnemyShot(room, enemy, target);
       const frenzyMult = hasAffix(room, "frenzy") ? 0.7 : 1;
