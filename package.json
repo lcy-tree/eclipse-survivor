@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "vitest run"
   },
   "dependencies": {
     "nodemailer": "^8.0.7",
     "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.7"
   }
 }

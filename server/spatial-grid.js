@@ -35,6 +35,13 @@ class SpatialGrid {
 
   // 查询某个位置周围 radius 内的所有实体
   query(x, y, radius = 0) {
+    if (!this.cells.size) return [];
+    if (!isFinite(radius)) {
+      // 返回所有实体
+      const results = [];
+      for (const bucket of this.cells.values()) results.push(...bucket);
+      return results;
+    }
     const minCx = Math.floor((x - radius) / this.cellSize);
     const maxCx = Math.floor((x + radius) / this.cellSize);
     const minCy = Math.floor((y - radius) / this.cellSize);
@@ -48,7 +55,6 @@ class SpatialGrid {
         const bucket = this.cells.get(key);
         if (!bucket) continue;
         for (const entity of bucket) {
-          // 用对象引用去重（实体可能同时在多个边界桶中，但这里每个实体只在一个桶里）
           if (seen.has(entity)) continue;
           seen.add(entity);
           if (radius <= 0 || Math.hypot(entity.x - x, entity.y - y) <= radius) {
@@ -62,12 +68,25 @@ class SpatialGrid {
 
   // 找到离 (x, y) 最近的实体，可选 radius 限制
   findNearest(x, y, radius = Infinity) {
+    if (!this.cells.size) return null;
+    if (!isFinite(radius)) {
+      // 扫描所有桶
+      let best = null;
+      let bestD = Infinity;
+      for (const bucket of this.cells.values()) {
+        for (const entity of bucket) {
+          const d = Math.hypot(entity.x - x, entity.y - y);
+          if (d < bestD) { bestD = d; best = entity; }
+        }
+      }
+      return best;
+    }
     const minCx = Math.floor((x - radius) / this.cellSize);
     const maxCx = Math.floor((x + radius) / this.cellSize);
     const minCy = Math.floor((y - radius) / this.cellSize);
     const maxCy = Math.floor((y + radius) / this.cellSize);
     let best = null;
-    let bestD = radius;
+    let bestD = Infinity;
     const seen = new Set();
 
     for (let cx = minCx; cx <= maxCx; cx++) {
