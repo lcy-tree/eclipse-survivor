@@ -1,7 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
-const crypto = require("crypto");
+const crypto = require("crypto"); // eslint-disable-line no-redeclare
 const nodemailer = require("nodemailer");
 const { WebSocketServer } = require("ws");
 const definitions = require("./server/definitions");
@@ -28,7 +28,7 @@ try {
       if (eq > 0) process.env[trimmed.slice(0, eq).trim()] = trimmed.slice(eq + 1).trim();
     }
   }
-} catch (_) { /* 安静降级 */ }
+} catch (_) { /* 安静降级 */ } // eslint-disable-line no-unused-vars
 
 const mailUser = process.env.MAIL_USER;
 const mailPass = process.env.MAIL_PASS;
@@ -56,7 +56,7 @@ const types = {
 const {
   chapterThemes, chapters, heroes, enemyDefs, talents,
   upgradeDefs, evolutionDefs, roomModifiers, difficulties, coopAchievements,
-  encyclopedia: encDef, getDailyChallenge, getWeeklyChallenge,
+  encyclopedia: encDef, getWeeklyChallenge,
   generateMonsterSvg, generateBossSvg, generateUpgradeSvg, generateTermSvg,
   svgWrap
 } = definitions;

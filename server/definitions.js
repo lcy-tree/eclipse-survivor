@@ -387,7 +387,7 @@ function generateMonsterSvg(id, def) {
   const dark = darken(c, 0.35);
   const light = lighten(c, 0.25);
   const ox = () => Math.round(rng() * 8 - 4);
-  const oy = () => Math.round(rng() * 6 - 3);
+  const oy = () => Math.round(rng() * 6 - 3); // eslint-disable-line no-unused-vars
   let body = `<rect width="128" height="128" rx="16" fill="#0a0810"/>`;
   body += `<rect width="128" height="128" rx="16" fill="${c}" opacity="0.06"/>`;
   if (id === "husk") {
